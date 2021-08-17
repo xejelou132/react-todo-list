@@ -1,11 +1,16 @@
 import TodoItem from "./TodoItem";
-import { initialTodoList } from "../../common/constants/constants.js";
-import { getAllToDoIds } from "../../utils/utils.js";
+import { useSelector } from "react-redux";
+import { selectTodoIds } from "../reducer/todoSlice";
+import "../../styles/TodoForm.css"
 
 
-function TodoGroup(props) {
+function TodoGroup() {
+
+    const todoIds = useSelector(selectTodoIds);
     return (
-        <div>{getAllToDoIds(initialTodoList).map((id)=> (
+        <div>
+          <h3 className="h3">Your Todos:</h3>
+            {todoIds.map((id)=> (
                 <TodoItem key={id} id={id}> </TodoItem>
         ))} </div>
     );

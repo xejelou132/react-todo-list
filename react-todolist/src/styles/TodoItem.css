@@ -1,0 +1,30 @@
+.todoItem-todo.done{
+    text-decoration: line-through;
+    
+}
+
+.todoItem-todo{
+
+    padding-left: 5px; 
+	padding-right: 5px; 
+	padding-top: 5px; 
+    margin-top: 12px;
+    
+}
+.todoItem-todo span {
+    border: none;
+    color: red;
+    word-spacing: 30px;
+    text-align: right;
+    float: right;
+    
+  
+  }
+
+  .todoItem-todo input {
+
+
+  }
+  
+
+ 

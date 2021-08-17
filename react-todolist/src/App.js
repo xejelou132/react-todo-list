@@ -1,10 +1,10 @@
 import './App.css';
-import TodoGroup from './feature/components/TodoGroup';
+import TodoList from './feature/components/TodoList';
 
 function App() {
   return (
     <div className="App">
-      <TodoGroup></TodoGroup>
+      <TodoList></TodoList>
     </div>
   );
 }
