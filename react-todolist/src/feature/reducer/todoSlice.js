@@ -1,52 +1,51 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit";
 
 const todosAdapter = createEntityAdapter();
-const { v4: uuidv4 } = require('uuid');
+
 
 const initialState = todosAdapter.getInitialState({
-
-    ids:["1"],
-    entities:{  
-        1:{
-            id:"1",
-            text:"testing todo",
-            done:false,
-
-        },
-    },
-
 });
    
 
 const todoSlice = createSlice({
 
-    
        name:"todos",
        initialState:initialState,
        reducers:{
 
-           AddToDo(state , action){
-            todosAdapter.addOne(state,{
-             id:uuidv4(),
-             text:action.payload,
-             done:false,
-            });
-           },
+           AddToDo:todosAdapter.addOne,
 
            ToogleText(state , action){
-               const todo = state.entities[action.payload];
-               todo.done = !todo.done;
+            todosAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload.updateTodo
+            });
 
            },
 
-           deleteTodo:todosAdapter.removeOne
-
+           deleteTodo(state, action){
+            todosAdapter.removeOne(state, action.payload.id);
+        },
+        
+           addToDos(state,action){
+            todosAdapter.addMany(state,action.payload);
+        }
        },
+         
    });
 
    export default todoSlice.reducer;
 
-   export const {AddToDo,ToogleText,deleteTodo} = todoSlice.actions;
+   export const { AddToDo,ToogleText,deleteTodo, addToDos } = todoSlice.actions;
 
-   export const { selectIds: selectTodoIds, selectById: selectTodoById } = todosAdapter.getSelectors((state) => state.todoList);
+   export const {
+    selectAll:selectTodos,
+    selectIds: selectTodoIds, 
+    selectById: selectTodoById } = 
+    todosAdapter.getSelectors((state) => state.todoList);
+
+    export const selectDoneList = createSelector([selectTodos], (todos) =>
+    todos.filter((todo) => todo.done));
+    
+  
 
