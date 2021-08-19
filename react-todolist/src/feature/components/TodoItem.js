@@ -17,14 +17,13 @@ function TodoItem(props) {
         updateTodo(props.id, {done: !todo.done}).then((response) => {
             dispatch(ToogleText({id:props.id, updateTodo: response.data}));
         });
-        
     }
  
     const todoStatus = todo.done? "done" : "";
     const checkStatus = todo.done? "done" : "";
 
     function handleDelete(){   
-     
+
         deleteTodos(props.id).then((response) => {
             dispatch(deleteTodo(response.data));
         })

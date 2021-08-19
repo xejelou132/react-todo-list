@@ -29,16 +29,16 @@ function TodoForm() {
             createTodo(text).then((response) => {
               dispatch(AddToDo(response.data));
             });
+            success();
         setText("");
         }
-        success();
 
     }
 
 
     return (
         <div className="todoForm">
-           <Search  allowClear type = "text" placeholder="input todo here" value={text}
+           <Search type = "text" placeholder="input todo here" value={text}
             onChange={handleChange} enterButton="Add"  size="large" onSearch ={handleAdd} />
         </div>
     );

@@ -1,17 +1,27 @@
-import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import React from 'react'
 import './App.css';
 import DoneList from './feature/components/DoneList';
 import TodoList from './feature/components/TodoList';
 import NotFound from './feature/notfound/notfound';
 import { Layout } from 'antd';
+import { useDispatch } from "react-redux";
+import { getTodos } from "./feature/apis/todos";
+import { addToDos } from "./feature/reducer/todoSlice";
+
 const { Header, Footer,Content } = Layout;
 
 
-
 function App() {
+
+  const dispatch = useDispatch();
+      getTodos().then((response) => {
+          dispatch(addToDos(response.data))
+      });
+
+
   return (
-    
+  
 <React.Fragment>
 
 <Layout>

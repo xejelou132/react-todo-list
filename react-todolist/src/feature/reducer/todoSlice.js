@@ -13,7 +13,7 @@ const todoSlice = createSlice({
        initialState:initialState,
        reducers:{
 
-           AddToDo:todosAdapter.addOne,
+        AddToDo:todosAdapter.addOne,
 
            ToogleText(state , action){
             todosAdapter.updateOne(state, {

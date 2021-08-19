@@ -4,12 +4,13 @@ import { selectTodoIds } from "../reducer/todoSlice";
 import "../../styles/TodoForm.css"
 
 
+
 function TodoGroup() {
 
     const todoIds = useSelector(selectTodoIds);
     return (
         <div>
-         &ensp; &ensp; &ensp;<h3 className="h3">Your Todos:</h3>
+        <h3 className="h3">Your Todos:</h3>
             {todoIds.map((id)=> (
                 <TodoItem key={id} id={id}> </TodoItem>
         ))} </div>
