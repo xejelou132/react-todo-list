@@ -20,6 +20,7 @@ function TodoForm() {
 
     function handleChange(event){
         setText(event.target.value);
+        console.log( setText(event.target.value));
     }
 
     function handleAdd(){

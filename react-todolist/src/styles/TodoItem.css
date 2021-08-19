@@ -31,6 +31,27 @@
     bottom: 500;
 
 }
+.edit{
+     display:none; 
+}
+.editShow{
+    position: absolute;
+    right: 750px;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 0px 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+textarea {
+    width:450px;
+    padding: 3px;
+    
+    }
+
 
 
  

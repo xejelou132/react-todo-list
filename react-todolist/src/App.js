@@ -1,5 +1,5 @@
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css';
 import DoneList from './feature/components/DoneList';
 import TodoList from './feature/components/TodoList';
@@ -15,10 +15,12 @@ const { Header, Footer,Content } = Layout;
 function App() {
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
       getTodos().then((response) => {
           dispatch(addToDos(response.data))
-      });
-
+      })
+  });
 
   return (
   
