@@ -1,34 +1,40 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import "../../styles/TodoItem.css"
 import { useSelector,useDispatch} from 'react-redux';
 import { deleteTodos, updateTodo } from '../apis/todos';
 import { selectTodoById,ToogleText, deleteTodo, updateText } from '../reducer/todoSlice.js';
-import { message,Checkbox,Modal } from 'antd';
+import { message,Checkbox,Modal,Input } from 'antd';
 
 const success = () => {
     message.success('Deleted todo success');
   };
 
+const { TextArea } = Input;
 
-  
 function TodoItem(props) {
     const todo = useSelector(state => selectTodoById(state, props.id));
     const dispatch = useDispatch();
     const [text,setText] = useState(todo.text);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    
 
 const showModal = () => {
     setIsModalVisible(true);
   };
 
 
-  function onClick () {
+  const handleOk = () =>  {
+    if (text === "") {
+
+        setIsModalVisible(false);
+        
+    } else {
     updateTodo(props.id, {text: text}).then((response) => {
-        dispatch(updateText({id:props.itemId, updateTodo: response.data}));
+        dispatch(updateText({id:props.id, updateTodo: response.data}));
     });
     setIsModalVisible(false);
+}
 
-    console.log(todo.text)
   };
 
   function handleCancel(){
@@ -62,8 +68,8 @@ const showModal = () => {
                  <button className = "delete" onClick= {handleDelete}>X</button>
                  <button className = {todo.done ? 'edit' : 'editShow'} onClick={showModal}>Edit</button>
             </div>    
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={() => onClick(props.id)} onCancel={handleCancel}>
-        <textarea className="textarea"   value = {text}  onChange ={handleChange}></textarea>
+            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+             <TextArea placeholder = {todo.text} value = {text} onChange = {handleChange}/>
 
       </Modal>
 
